@@ -1,0 +1,9 @@
+version: '3'
+services:
+  mongoDB:
+    image: mongo
+    volumes:
+      - /data/db
+    ports:
+      - "27017:27017"
+    container_name: mongoDB
