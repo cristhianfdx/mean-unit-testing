@@ -1,17 +1,17 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
 
-var apiRouter = require('./routes/pins').router;
+const apiRouter = require('./routes/pins').router;
 
-var app = express();
+const app = express();
 
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 mongoose
-  .set('useFindAndModify', false)
-  .connect('mongodb://localhost/pins', { promiseLibrary: require('bluebird'), useNewUrlParser: true })
+  .set('useUnifiedTopology', true )
+  .connect('mongodb://localhost/pins', { useNewUrlParser: true })
   .then(() => console.log('connection successful'))
   .catch(err => console.error(err));
 

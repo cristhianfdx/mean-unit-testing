@@ -23,6 +23,11 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     redirectTo: 'app/pins'
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    redirectTo: 'app/pins'
   }
 ];
 
