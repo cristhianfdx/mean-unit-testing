@@ -122,6 +122,122 @@ describe("Router Testing", () => {
         });
     });
 
+    it("should return 500", done => {
+      spyOn(Pins, "create").and.callFake((pins, callback) => {
+        callback(true, {});
+      });
+
+      axios
+        .post("http://localhost:3000/api", {
+          title: "title",
+          author: "author",
+          description: "description",
+          assets: [{ url: "http://platzi.com" }]
+        })
+        .catch(err => {
+          expect(err.response.status).toBe(500);
+          done();
+        });
+    });
+
+    it("should return error to call getMetadataFromAssets method", done => {
+      spyOn(requestPromise, "get").and.returnValue(null);
+
+      spyOn(Pins, "create").and.callFake((pins, callback) => {
+        callback(true, {});
+      });
+
+      axios
+        .post("http://localhost:3000/api", {
+          title: "title",
+          author: "author",
+          description: "description",
+          assets: [{ url: "http://platzi.com" }]
+        })
+        .catch(err => {
+          expect(err.response.status).toBe(500);
+          done();
+        });
+    });
 
   });
+
+  describe('PUT Method', () => {
+
+    it("should update pin", done => {
+      spyOn(Pins, "findByIdAndUpdate").and.callFake((id, args, callback) => {
+        callback(false, {});
+      });
+
+      axios
+        .put("http://localhost:3000/api/1", {
+          title: "title",
+          author: "author",
+          description: "description",
+          assets: [{ url: "http://platzi.com" }]
+        })
+        .then(res => {
+          expect(res.status).toBe(200);
+          done();
+        });
+    });
+
+    it('should return error', done => {
+      spyOn(Pins, "findByIdAndUpdate").and.callFake((id, args, callback) => {
+        callback(true, {});
+      });
+
+      axios
+        .put("http://localhost:3000/api/1", {
+          title: "title",
+          author: "author",
+          description: "description",
+          assets: [{ url: "http://platzi.com" }]
+        })
+        .catch(error => {
+          expect(error.response.status).toBe(500);
+          done();
+        });
+    });
+  });
+
+  describe('DELETE Method', () => {
+
+    it("should delete pin", done => {
+      spyOn(Pins, "findByIdAndRemove").and.callFake((id, args, callback) => {
+        callback(false, {});
+      });
+
+      axios
+        .delete("http://localhost:3000/api/1", {
+          title: "title",
+          author: "author",
+          description: "description",
+          assets: [{ url: "http://platzi.com" }]
+        })
+        .then(res => {
+          expect(res.status).toBe(200);
+          done();
+        });
+    });
+
+    it('should return error', done => {
+      spyOn(Pins, "findByIdAndUpdate").and.callFake((id, args, callback) => {
+        callback(true, {});
+      });
+
+      axios
+        .delete("http://localhost:3000/api/1", {
+          title: "title",
+          author: "author",
+          description: "description",
+          assets: [{ url: "http://platzi.com" }]
+        })
+        .catch(error => {
+          expect(error.response.status).toBe(500);
+          done();
+        });
+    });
+  });
+
 });
