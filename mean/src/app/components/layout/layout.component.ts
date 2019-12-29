@@ -14,6 +14,7 @@ export class LayoutComponent {
 
   constructor(private bottomSheet: MatBottomSheet, private router: Router) {}
 
+  // tslint:disable-next-line: use-life-cycle-interface
   ngOnInit() {
     this.verifyEditMode(this.router.url);
 
