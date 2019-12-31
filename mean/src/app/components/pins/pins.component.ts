@@ -24,6 +24,7 @@ export class PinsComponent {
     private formBuilder: FormBuilder
   ) {}
 
+  // tslint:disable-next-line: use-life-cycle-interface
   ngOnInit() {
     this.repository.getPins().subscribe(pins => {
       this.pins = pins.map(pin => {
@@ -40,7 +41,7 @@ export class PinsComponent {
       });
     });
 
-    this.pinsService.$actionObserver.pipe(filter(action => action === 'save')).subscribe(action => {
+    this.pinsService.$actionObserver.pipe(filter(action => action === 'save')).subscribe(_action => {
       this.updateProgress(this.step);
     });
   }
@@ -70,7 +71,7 @@ export class PinsComponent {
         tags: pin.tags,
         assets: pin.assets
       })
-      .subscribe(pin => {
+      .subscribe(_pin => {
         this.snackBar.open('Progress updated!', 'OK', {
           duration: 2000
         });
