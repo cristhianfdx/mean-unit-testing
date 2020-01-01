@@ -11,7 +11,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  public get(endpoint: string, headers?): Observable<any> {
+  public get(endpoint: string, headers?: any): Observable<any> {
     if (headers) {
       return this.http.get(this.url + endpoint, { headers });
     }
